@@ -12,8 +12,8 @@
 | # | Source | Type | Date accessed |
 |---|---|---|---|
 | S1 | https://www.microsoft.com/en-us/power-platform/topics/phases-of-the-software-development-lifecycle | Documentation | 22 August, 2026|
-| S2 | || |
-| S3 | | | |
+| S2 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-security-development-and-operation | Documentation | 22 August, 2026|
+| S3 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-microsoft-security-development-lifecycle | Documentation | 22 August, 2026|
 | S4 | | | |
 | S5 | | | |
 
@@ -83,6 +83,15 @@ Microsoft identifies several key activities during this phase:
 
 
 ## 3. Human approval gates
+Microsoft documentation identifies multiple points where human approval is required before software changes are allowed to progress.
+
+### Code review before integration
+Microsoft's Security Development Lifecycle (SDL) requires code to undergo manual review by someone other than the engineer who wrote the code before it can be checked into a release branch. The reviewer checks whether the change meets the relevant SDL and design requirements and whether the required functional and security tests have been passed.
+
+If problems are identified, the reviewer can request changes or block the code from progressing. Once the code is considered satisfactory, approval from the reviewer is required before it can move to the next deployment phase.
+
+### Final security and privacy review
+Microsoft also states that new features and material changes undergo a final security and privacy review before release to confirm that the required security and privacy requirements have been satisfied.
 
 ## 4. Mechanics inside each stage
 

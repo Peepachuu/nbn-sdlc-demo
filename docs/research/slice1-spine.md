@@ -59,7 +59,7 @@ Google verdict: challenge, implicitly. Google/DORA's 2025 model makes "user-cent
 
 Microsoft verdict: challenge. The playbook's "Definition of Ready" and "Backlog Management" treat story readiness as a human team-agreement gate (microsoft.github.io/code-with-engineering-playbook/agile-development/team-agreements/definition-of-ready/).
 
-The peer-reviewed literature is the decisive evidence here.
+The peer-reviewed evidence cuts against the GREEN:
 
 - Quattrocchi, Pasquale, Spoletini, Baresi, "Can LLMs Generate User Stories and Assess Their Quality?" (arXiv 2507.15157, 2025): across 10 LLMs, "LLMs can generate US similar to humans in terms of coverage and stylistic quality, but exhibit lower diversity and creativity… they tend to meet the acceptance quality criteria less frequently, regardless of the scale of the LLM model."
 - ALAS study (Springer XP 2024, Austrian Post Group IT; arXiv 2403.09442): LLM agents improve user-story quality across six agile teams. Supports AI assist deployed with human product owners.
@@ -103,7 +103,7 @@ Google verdict: mixed. Google's HEART framework (Happiness, Engagement, Adoption
 
 Microsoft verdict: the RED half is confirmed. Microsoft Inclusive Design ("Kill Your Personas," Persona Spectrum; Margaret P, Microsoft Design, medium.com/microsoft-design) insists on "solve for one, extend to many" and designing with excluded users rather than for an "artificial average." That is the client's "you are not the user" in Microsoft's words. Fluent and Inclusive guidance treat brand and inclusion decisions as human.
 
-The empirical evidence on AI-made UX artifacts decides the GREEN half.
+The empirical evidence on AI-made UX artifacts qualifies the GREEN half:
 
 - Personas and synthetic users: challenge the GREEN. Nielsen Norman Group (Rosala & Moran, "Synthetic Users," nngroup.com, 21 June 2024) found synthetic users "provide shallow or overly favorable feedback" and idealise or fabricate behaviour. One synthetic user claimed "Yes, I completed all the courses I mentioned" where real users had not; "This tendency for idealization was a theme we observed over and over." Peer-reviewed backup: CoMPosT (Cheng, Piccardi, Yang, EMNLP 2023, aclanthology.org/2023.emnlp-main.669) finds GPT-4 persona simulations of certain demographics and topics are "highly susceptible to caricature." A contrasting result, De Paoli (CHI 2024 Extended Abstracts), found LLM personas "indistinguishable" from human ones, but that measures perceived plausibility rather than accuracy, so it makes the fabrication risk worse, not better.
 - Usability and accessibility critique: AMBER, not GREEN. ScreenAudit (Zhong et al., CHI 2025, arXiv 2504.02110): the LLM covered 69.2% of expert-found accessibility errors at 71.3% precision, against 31.3% coverage for rule-based checkers. A strong complement, with roughly a 31% miss rate and a 29% false-positive rate. Guerino et al. (INTERACT 2025, arXiv 2506.16345): GPT-4o "generated several false positives due to hallucinations… LLMs should be used as a support, and not as the sole tool, in heuristic evaluation."
@@ -206,7 +206,7 @@ Mechanics:
 
 ---
 
-## The stage order: confirmed or challenged?
+## The stage order: challenged as a strict sequence
 
 Verdict: challenged as a strict linear sequence. Defensible only as a taxonomy of concerns.
 

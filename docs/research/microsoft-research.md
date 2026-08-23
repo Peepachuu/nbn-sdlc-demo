@@ -146,6 +146,20 @@ This complements the general SDLC maintenance activities, such as performance mo
 
 ## 5. Where AI appears and where it does not
 
+Microsoft's SDLC documentation does not explicitly identify specific lifecycle stages where AI must or must not be used. Instead, Microsoft describes AI as a way to improve efficiency across the software development lifecycle.
+
+Microsoft explains that AI tools and agents can analyse information from sources such as user feedback, performance metrics and testing results, allowing the teams to identify potential issues earlier and support decision-making throughout the lifecycle.
+
+Moreover, Microsoft states that AI can automate repetitive and time-consuming development activities, allowing the development teams to spend more time on complex and creative aspects of software development.
+
+Microsoft provides examples of AI generating development plans, code and pull requests. These examples suggest that AI may contribute to activities within stages such as planning and development, but the documentation does not assign AI to a fixed set of SDLC stages.
+
+Additionally, Microsoft's Security Development Lifecycle (SDL) documentation does not describe AI as replacing the required human approval processes. Although Microsoft uses various automated security tools during verification, these tools are not explicitly described as AI in the documentation and operate alongside independent manual code review.
+
+Microsoft still requires the code to be reviewed by someone other than the engineer who developed it. Furthermore, problems identified through manual review or automated checks must be resolved before the code can progress. Microsoft also documents a final security and privacy review before new features and material changes can be released.
+
+Therefore, Microsoft's documentation suggests that AI can assist with creating, analysing and planning software development work, while automated tools can assist with verification. However, required human review and approval still remains an explicit control before software changes are allowed to progress towards release.
+
 ## 6. What the papers say
 
 ## 7. Borrow

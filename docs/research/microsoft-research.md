@@ -15,7 +15,7 @@
 | S2 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-security-development-and-operation | Documentation | 22 August, 2026|
 | S3 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-microsoft-security-development-lifecycle | Documentation | 22 August, 2026|
 | S4 | https://arxiv.org/pdf/2310.02059 | Empirical Paper | 23 August, 2026 |
-| S5 | | | |
+| S5 | https://arxiv.org/pdf/2505.16339 | Empirical Paper | 23 August, 2026 |
 
 ## 2. The lifecycle stages, in their words
 S1 is the official documentation from Microsoft describing the Software Development Life Cycle (SDLC). Microsoft defines the SDLC as a structured methodology for developing software that meets quality standards and security requirements. 
@@ -172,6 +172,24 @@ The identified weaknesses covered 43 different Common Weakness Enumeration (CWE)
 The researchers also tested whether Copilot Chat could fix the identified security issues when it was provided with warnings from static-analysis tools. The results showed that Copilot Chat was able to fix up to 55.5% of the identified issues, showing that AI can assist with fixing the security problems, but it does not reliably resolve every weakness.
 
 These findings suggest that AI-generated code can introduce security weaknesses and should not be assumed to be safe without further verification. This supports Microsoft's use of automated security checks and independent human review before code is allowed to progress towards release. This is especially important because AI-generated code may appear functional, while still containing security weaknesses.
+
+### LLM assistance during code review
+Aðalsteinsson et al. studied how Large Language Models (LLMs) could assist developers during code reviews at WirelessCar Sweden AB. The study first examined the existing manual code review process and identified common problems experienced by developers such as delayed reviews, context switching, large or complex pull requests, and reviewers not having enough contextual information about the code.
+
+The researchers then tested two different forms of LLM-assisted code review with ten developers. The first approach used the AI as a co-reviewer, where it automatically produced a summary and highlighted possible issues before the human began reviewing the code. The second approach used the AI as an interactive assistant, where the reviewer could ask it clarification questions about specific parts of the code or high-level architectural questions when additional information was necessary.
+
+The developers generally preferred the AI-led approach, particularly when reviewing large, unfamiliar or lower-risk pull requests. Participants reported that the AI could provide useful summaries, reduce the effort required to understand unfamiliar code, and identify issues that a reviewer might otherwise miss.
+
+However, the study also identified limitations. The AI sometimes produced incorrect, unclear or low-priority suggestions, creating concerns around false positives and trust. Developers also warned against relying too heavily on the AI, and some developers preferred human-led reviews when they were familiar with the codebase or when the pull request involved more critical changes.
+
+The researchers therefore conclude that LLMs are better suited to complementing human reviewers rather than replacing them. This supports Microsoft's SDL approach, where automated checks were operated alongside an independent human reviewer during Verification, who was ultimately responsible for reviewing and approving the code before it progresses.
+
+### Connection to Microsoft SDLC
+Both papers suggest that AI can provide useful assistance during both Development and Verification, but it should not operate without additional checks.
+
+The security study shows that AI-generated code can contain security vulnerabilities even when the system may appear functional, while the code review study shows that LLM assistance can improve parts of the review workflow but still introduces concerns around reliability and trust.
+
+These findings support Microsoft's approach of combining automated tools with independent human review and verification before software changes progress towards release.
 
 ## 7. Borrow
 At least two ideas we should take into our model, each with a reason.

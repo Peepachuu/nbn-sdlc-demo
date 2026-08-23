@@ -205,6 +205,13 @@ These findings support Microsoft's approach of combining automated tools with in
 
 ## 8. Reject
 
+1. **Do not assume that AI-generated code is safe because it appears functional.**  
+    The security study found that a considerable proportion of AI-generated code contained security weaknesses across many different CWE categories. Therefore, AI-generated code should still undergo comprehensive testing, security checks and human review before it is allowed to progress towards release. Additional testing may also be appropriate for higher-risk changes.
+
+2. **Do not apply AI uniformly across every stage of the SDLC.**  
+   Microsoft's documentation describes AI as a capability that can assist throughout the lifecycle, but it does not mention the use of AI within every individual stage. The code review study also shows that the usefulness of AI depends on the context, such as the complexity and criticality of the change. Therefore, our model should only use AI where it provides a clear benefit rather than requiring AI involvement at every stage.
+
+
 ## 9. Open questions
 
 

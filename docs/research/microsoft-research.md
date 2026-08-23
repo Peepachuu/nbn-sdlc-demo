@@ -214,4 +214,15 @@ These findings support Microsoft's approach of combining automated tools with in
 
 ## 9. Open questions
 
+1. **At which specific stages of Microsoft's SDLC is AI currently used?**  
+
+2. **Are there any additional review or security requirements for AI-generated code, compared with human-written code?**  
+
+3. **How does Microsoft decide when AI assistance is appropriate during code review?**  
+
+4. **How effective are Microsoft's existing verification mechanisms at detecting issues specifically introduced by AI-generated code?**  
+
+5. **Could AI eventually take on a larger role in approval decisions, or will the final approval would always be verified by a human?**  
+
+
 

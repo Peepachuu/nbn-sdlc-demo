@@ -95,6 +95,55 @@ Microsoft also states that new features and material changes undergo a final sec
 
 ## 4. Mechanics inside each stage
 
+### Planning and Analysis
+During Planning and Analysis, the project goals, stakeholder expectations, feasibility, resources and software requirements are established. These requirements are then translated into more detailed system specifications that guide the later stages of the development.
+
+During this phase, Microsoft also adds security and privacy requirements. These are determined based on various factors such as the type of data being handled, known threats, regulations, industry requirements and lessons learned from previous incidents.
+
+### Design
+During Design, the architecture and interaction between the different components of the system are defined.
+
+Microsoft's SDL create threat modelling during this stage. Through this modelling, the development teams can identify important components of the system and examine how they interact during critical scenarios such as Authentication, in order to identify possible security threats. Microsoft also recommends to create Data-flow diagrams to represent how the information moves through the system, allowing for easier identification of threats.
+
+Any threats that are identified during this stage are evaluated and appropriate mitigations are added to the system's security requirements. Microsoft also requires threat models to be reviewed before a product is released.
+
+### Development
+During Development, developers implement the requirements and designs produced during the earlier stages.
+
+Microsoft provides developers with approved development tools, such as compilers, development environments and built-in security checks. These tools are intended to help developers implement the functional and security requirements of the software.
+
+Microsoft also performs automated checks while code is being committed and builds are being created. These checks can identify issues such as exposed credentials, vulnerabilities in source code and problems in third-party or open-source components.
+
+### Testing
+Testing is used to determine whether the implementation adheres to the required functional, user and security expectations.
+
+Microsoft's SDL adds several verification mechanisms to this stage. The code is independently reviewed by someone who did not write the code. 
+
+Automated security tools are also used to perform checks such as:
+- Static code analysis
+- Binary analysis
+- Credential and secret scanning
+- Encryption checks
+- Fuzz testing
+- Configuration validation
+- Open-source component and vulnerability checking
+
+If the reviewer or the automated tools identify a problem, the developer responsible for writing the code must address the issue before resubmitting the code for review again.
+
+Microsoft also uses penetration testing as an additional method of identifying security weaknesses that may not have been detected through the other verification methods.
+
+### Deployment
+Once the required testing and reviews have been completed, the software can progress towards release.
+
+For the deployment, Microsoft uses a Safe Deployment Process (SDP), where the software is not immediately available to every customer. Instead, the build is gradually released to larger and larger groups. The release begins with the development team, followed by Microsoft employees, selected external users and eventually the wider customer base.
+
+This staged approach allows Microsoft to observe the behaviour and stability of the software on a smaller scale before expanding the release to more users.
+
+### Maintenance
+After deployment, Microsoft continues monitoring its services to identify security incidents and other issues that may occur after the release.
+
+This complements the general SDLC maintenance activities, such as performance monitoring, bug fixing, updates and user support.
+
 ## 5. Where AI appears and where it does not
 
 ## 6. What the papers say

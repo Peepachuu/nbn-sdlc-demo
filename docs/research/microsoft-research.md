@@ -192,10 +192,16 @@ The security study shows that AI-generated code can contain security vulnerabili
 These findings support Microsoft's approach of combining automated tools with independent human review and verification before software changes progress towards release.
 
 ## 7. Borrow
-At least two ideas we should take into our model, each with a reason.
 
-1.
-2.
+1. **Keeping an independent human approval gate before code progresses towards release.**  
+   Microsoft's SDL requires code to be reviewed by someone other than the engineer who wrote it. This should be included in our model, especially when AI-generated or AI-assisted code is involved. The empirical studies show that AI-generated code can contain security weaknesses and that LLM-based code review can produce incorrect suggestions. Therefore, AI should assist the review process rather than replace the final human judgement.
+
+2. **Combine automated verification with human review rather than relying on either one alone.**  
+   Microsoft's SDL uses automated security checks alongside independent manual review. This two-step approach should be adopted because the empirical evidence shows that both AI-generated code and AI-assisted review can be imperfect. Automated tools can identify issues efficiently, while human reviewers can provide contextual judgement and evaluate issues that automated systems may miss or incorrectly classify.
+
+3. **Use gradual deployment instead of releasing changes to all users at once.**  
+   Microsoft's Safe Deployment Process (SDP) gradually releases software to increasingly larger groups before a full release. This should be included in our model because it allows problems to be detected on a smaller scale before they affect a large number of users. This is especially useful when AI-generated or AI-assisted changes are involved, as the empirical evidence shows that some issues may remain even after development and verification.
+
 
 ## 8. Reject
 

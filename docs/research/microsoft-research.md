@@ -14,7 +14,7 @@
 | S1 | https://www.microsoft.com/en-us/power-platform/topics/phases-of-the-software-development-lifecycle | Documentation | 22 August, 2026|
 | S2 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-security-development-and-operation | Documentation | 22 August, 2026|
 | S3 | https://learn.microsoft.com/en-us/compliance/assurance/assurance-microsoft-security-development-lifecycle | Documentation | 22 August, 2026|
-| S4 | | | |
+| S4 | https://arxiv.org/pdf/2310.02059 | Empirical Paper | 23 August, 2026 |
 | S5 | | | |
 
 ## 2. The lifecycle stages, in their words
@@ -161,6 +161,17 @@ Microsoft still requires the code to be reviewed by someone other than the engin
 Therefore, Microsoft's documentation suggests that AI can assist with creating, analysing and planning software development work, while automated tools can assist with verification. However, required human review and approval still remains an explicit control before software changes are allowed to progress towards release.
 
 ## 6. What the papers say
+
+The empirical papers provide evidence regarding the performance of AI when it is used during software development and code review. These findings will help evaluate whether the human review and verification practices identified in the Microsoft's SDL, are necessary when AI is introduced into the development process.
+
+### Security weaknesses in AI-generated code
+Fu et al. analysed 733 AI-generated code snippets collected from real GitHub projects. The snippets were generated using GitHub Copilot, CodeWhisperer and Codeium. The study found that around 30% of the analysed snippets contained security weaknesses, with 29.5% being Python snippets and 24.2% being JavaScript snippets. 
+
+The identified weaknesses covered 43 different Common Weakness Enumeration (CWE) categories. CWE is a classification system used to identify and describe common types of software and hardware security weaknesses. Of the 43 identified CWE categories, eight were included in the 2023 CWE Top 25, while six CWEs were classified as Stubborn Weaknesses within the CWE Top 25. This indicates that some of the identified weaknesses were widely recognised high-priority security risks.
+
+The researchers also tested whether Copilot Chat could fix the identified security issues when it was provided with warnings from static-analysis tools. The results showed that Copilot Chat was able to fix up to 55.5% of the identified issues, showing that AI can assist with fixing the security problems, but it does not reliably resolve every weakness.
+
+These findings suggest that AI-generated code can introduce security weaknesses and should not be assumed to be safe without further verification. This supports Microsoft's use of automated security checks and independent human review before code is allowed to progress towards release. This is especially important because AI-generated code may appear functional, while still containing security weaknesses.
 
 ## 7. Borrow
 At least two ideas we should take into our model, each with a reason.

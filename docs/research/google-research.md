@@ -49,7 +49,7 @@ Two or three papers minimum, from **Google Scholar** or **arXiv**. Search terms 
 
 ## 2. The lifecycle stages, in their words
 
-Google's software development lifecycle is described across several sources, each covering different stages in detail: the eng-practices guide examines code review, the Software Engineering at Google book explores release and production maintenance. When analyzed holistically, these sources describe a five-stage lifecycle from design to maintainance.
+Google's software development lifecycle is described across several sources, each covering different stages in detail: the eng-practices guide examines code review, the Software Engineering at Google book explores release and production maintenance. When analyzed holistically, these sources describe a five-stage lifecycle from design to maintenance.
 
 ### 2.1. Design
 
@@ -69,11 +69,32 @@ If the author and reviewer cannot come to consensus, they usually opt for a face
 
 ### 2.3. Testing
 
+Google's CI pipeline is built on the principle that the cost of a bug grows more; often exponentially, the later it is caught. This motivates catching problems as early as possible. However, as discussed before, to minimize waiting time from disruptive testing, it is split into two stages:
+
+- pre-submit tests (occur before code review)
+- post-submit tests (occur after code review and approval)
+
+Code changes that clear the pre-submit tests (and approval) have a 95%+ likelihood of passing the rest of the tests. This is treated as sufficient confidence to let these changes be integrated.
+
+After submission, Google's continuous build system, Test Automation Platform (TAP), asynchronously runs the full suite of tests. TAP handles more than 50,000 unique changes and four billion individual test cases daily. Google emphasizes in handling failing tests quickly as a failing TAP test may prevent a team from making forward progress or building a new release. Thus, failed tests are handled by the team's "Build Cop", regardless of who made the breaking change. If there is a failing test in their project, the Build Cop has to drop their current task and fix the build. 
 
 
 ### 2.4. Deployment
 
-### 2.5. Maintainance
+Google's CD pipeline handles the bulk of the Deployment phase. There is a continuous assembly of release candidates which are promoted and tested across a numerous environments, with only some reaching production.
+
+This process is done using tools developed by Google themselves, such as Rapid and Sisyphus.
+
+
+### 2.5. Maintenance
+
+Sustainable maintenance and reliability is achieved in Google through continual automated monitoring (the CI pipeline) and a monitoring and alerting system:
+
+* The CI pipeline, as discussed before, reveals how software is responding to changes in its environment. It focuses on the earler end of the workflow and indicates when a build is deployable shape.
+
+* Production monitoring depends on passive alerts and active analysts of running systems. It focuses on the later end of the same workflow and catches problems with the running system by reporting when tracked metrics surpass some threshold.
+
+Google monitoring system focuses on collecting information such as query counts and types, errors counts and types, and server lifetimes. This information is then used to guide decision-making for satisfying service level objectives (i.e. target level of reliability of the system) set by the site reliabilty team. Google deals with incidents by adhering to a "blameless postmortem culture", encompasses investigating and documenting incidents with goal of understanding and fixing the root problem, rather than avoiding or minimizing it and blaming others. 
 
 ## 3. Human approval gates
 

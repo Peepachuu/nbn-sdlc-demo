@@ -85,6 +85,8 @@ When an incident does occur despite this, Google deals with it by adhering to a 
 
 ## 4. Where AI appears and where it does not
 
+Across S1–S3, section 2's description of the lifecycle is notably free of AI or ML-based tooling. The automation that does appear, namely, Blaze/TAP's dependency-graph analysis, TAP's batch-splitting and culprit-finding, and Rapid/Sisyphus's rollout sequencing, are rule-based and deterministic rather than learned; nothing in these three sources describes a model making a design, review, testing, or rollout decision. The closest thing to "intelligence" mentioned is TAP being upgraded to auto-roll-back a change once it has "high confidence" in the culprit (2.3), but the sources don't say how that confidence is computed, so it can't be assumed to be ML-based without more digging.
+
 ## 5. What the papers say
 
 S1–S3 describe Google's own lifecycle with essentially no AI in it, whereas S4–S6 are all recent empirical studies of AI coding agents operating on public GitHub repositories. None of them study Google specifically, but together they paint a fairly consistent, and fairly cautious, picture of what agentic coding looks like once it meets a real review process.
@@ -110,10 +112,16 @@ Temporally, only Devin showed a clear, sustained improvement in acceptance rate 
 ## 6. Borrow
 At least two ideas we should take into our model, each with a reason.
 
-1.
-2.
+1. **Google's small-CL discipline, OWNERS-style gating, and reviwer guide and apply it to agent-authored changes as well.** 
+Section 2.2 already documents Google's norm that CLs should be small, single-purpose, and subject to a directory-specific OWNERS approval on top of the general reviewer's LGTM. The study from Watanabe and colleagues gives a concrete reason to apply that norm more strictly to agent output: Agentic-PRs bundle multiple purposes into one submission at more than three times the rate of human PRs (40.0% vs. 12.2%), and "too large to review" is one of the more common rejection reasons. Rather than inventing a new mechanism, we'd be tightening enforcement of a rule Google already has, at the specific point where the data says it's most likely to be violated.
+
+2. **Extend the design doc's "goals, trade-offs, alternatives considered" discipline to cover the act of delegating a task to an agent.** 
+Section 2.1 already treats the design doc as the artifact that captures reasoning before code gets written, precisely so reviewers don't have to reconstruct intent later. S4's recommendation that agent-generated PRs carry a "confidence card" (plan, assumptions, alternatives considered, known edge cases) is functionally the same idea, just not yet an artifact for us. Rather than adopting the researchers' new vocabulary, we could require the same design-doc habit to also cover a scoped agent task above some size threshold.
 
 ## 7. Reject
+
+- **Delegating to whichever agent is on hand regardless of task type, rather than matching agent to task.** Pinna and colleagues' central finding is that task type is a far stronger predictor of PR acceptance than which agent did the work, specifically a 29-percentage-point gap between the easiest and hardest task categories, bigger than most of the differences between agents on the same task. Furthermore, no single agent leads across the board (OpenAI Codex is strongest on fix/refactor; Claude Code leads on docs and features; Cursor leads on tests). Treating agentic coding as an interchangeable, one-size-fits-all tool and pointing it at whatever task happens to come up,rather than routing tasks to the agent/task combinations the data actually supports is a misuse of what these tools are shown to be good at.
+- **Treating a merged PR as the end of the agent's involvement rather than the start of an ongoing obligation to check its work.** Watanabe and colleagues' found that agents remain involved in a large share of post-merge revisions (41.1%), which suggests the realistic workflow is iterative rather than fire-and-forget; Liu and colleagues' findings go further and shows what happens when that follow-through doesn't happen; with 24.2% of AI-introduced issues are still present at HEAD, and security issues the least likely to ever get cleaned up (41.1% survival). "Proper use" per these papers looks like treating the merge as the point where monitoring *starts*, not where responsibility for the change ends.
 
 ## 8. Open questions
 

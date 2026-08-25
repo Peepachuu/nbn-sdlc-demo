@@ -1,33 +1,4 @@
-# Source Note Template
-
-**For:** Zafir (Google) and Chirag (Microsoft)
-**Feeds:** Slice 1 - the spine
-**Commit to:** `/docs/research/`
-
----
-
-## Before you start — the question you are answering
-Not "how does Google use AI?" Because that is largely unpublished. Ben's warning: if the only thing you can find is a blog post, it does not count.
-
-**Answer this instead:**
-What steps does this organisation say its software lifecycle has, where does it require a human to approve something, and what does the published evidence say about whether AI-generated work passes those same checks?
-
-
-## Two source types, both required
-
-**1. Documented practice, what the organisation says it does**
-Formal, citable documentation of their engineering process.
-
-- Zafir: Google's engineering practices documentation, their testing and code review guidance
-- Chirag: Microsoft's DevOps documentation, their engineering playbook, Azure DevOps practice guides
-
-
-**2. Empirical evidence — what actually happens with AI in the loop**
-Two or three papers minimum, from **Google Scholar** or **arXiv**. Search terms that might work: AI-assisted software development, LLM code generation quality, Copilot developer productivity, automated code review effectiveness, generated code defect rates.
-
----
-
-# Source Note — [Organisation]
+# Source Note — [Google]
 
 **Author:** Zafir Hasan
 
@@ -53,65 +24,77 @@ Google's software development lifecycle is described across several sources, eac
 
 ### 2.1. Design
 
-Many teams at Google require an approved design document before starting work on any major project. This is written by a software engineer using a team-approved template and shared in platforms such as Google Docs, to allow for collaboration. The design document is sometimes discussed and debated at team meetings (this differs from team to team), thus acting as a sort of code review before any actual coding.
+Many teams at Google require an approved design document before starting work on any major project. This is written by a software engineer using a team-approved template and shared in platforms such as Google Docs, to allow for collaboration; reviewers leave comments directly on the draft, so the negotiation of the design happens on the document itself. The design document is sometimes discussed and debated at team meetings (this differs from team to team), thus acting as a sort of code review before any actual coding. Google's own code review documentation in the SWE book re-confirms this ordering directly: new code and/or projects are generally expected to undergo this kind of design review *before* they go through code review, since a code review is explicitly "not the time to debate design decisions already made in the past."
 
-The design document is where engineers factor in the various facets of design such as security implications, internationalization, storage requirements and privacy converns, and et cetera. These sections are often reviewed by experts in said domains. Google's aim with the design document is to cover the goals of the design, its implementation strategy, and to propose key design decisions coupled with their corresponding trade-offs. Once approved, the design document acts as a record that can be reviewed in the future and as a benchmark in determining whether the project successfully achieved its goals.
+The design document is where engineers factor in the various facets of design such as security implications, internationalization, storage requirements and privacy concerns, and et cetera. These sections are often reviewed by experts in said domains. Google's aim with the design document is to cover the goals of the design, its implementation strategy, and to propose key design decisions coupled with their corresponding trade-offs. Once approved, the design document acts as a record that can be reviewed in the future and as a benchmark in determining whether the project successfully achieved its goals.
 
 ### 2.2. Development
 
-The first step in the development stage is the edit-compile-debug loop. After this has been completed by the author engineer, the author sends the code change, commonly called a Changelist (CL for short), in for the pre-submit tests. Pre-submit tests can take several hours in some instances. Thus, to minimize waiting time, teams create a fast subset of tests (often the unit tets for the project) that are run before a change is submitted for code review.
+The first step in the development stage is the edit-compile-debug loop. Google engineers work out of a single, company-wide monolithic repository, and builds are run through Blaze (open-sourced as Bazel), which lets engineers define build targets and their dependencies and automatically builds those dependencies whenever a target is built. After this loop has been completed by the author engineer, the author sends the code change, commonly called a Changelist (CL for short), in for the pre-submit tests. Google's guidance is that CLs should be kept small and focused on a single, easily-describable change, since small CLs are faster to review, easier to roll back, and reduce the odds of a merge conflict; a large CL is itself something a reviewer can push back on. Pre-submit tests can take several hours in some instances. Thus, to minimize waiting time, teams create a fast subset of tests (often the unit tests for the project) that are run before a change is submitted for code review; these are triggered automatically by Google's continuous build system, TAP (Test Automation Platform), every time the author uploads a new patchset of the CL.
 
-The code review is done by a separate engineer to ensure an improvement in the code health of Google's code base. Google follows a mantra of "continuous improvement", where code changes/CLs are not held to a "perfect" standard, rather reviewers look for whether the CL is better code (i.e. when it improve the overall code health of the system). Several aspects such as design, functionality, complexity, testing, documentation, and so on, are considered during a code review.
+The CL is sent for review through Google's code review tool, Critique, where the author and reviewer converse via inline comments attached to specific lines of the diff. The code review is done by a separate engineer to ensure an improvement in the code health of Google's code base. Google follows a mantra of "continuous improvement," where code changes/CLs are not held to a "perfect" standard; rather, reviewers look for whether the CL is better code (i.e. whether it improves the overall code health of the system) and grant approval, commonly referred to as an "LGTM" (Looks Good To Me), once that bar is met rather than waiting for the CL to be flawless. Several aspects such as design, functionality, complexity, testing, naming, comments, style, and documentation are considered during a code review. Google's own reviewer guidance is explicit that this shouldn't only be a search for mistakes: reviewers are asked to also point out what the author did well, especially when a comment from an earlier round was addressed particularly well, since telling a developer what they did right can be just as valuable, mentoring-wise, as telling them what they did wrong. Larger or unfamiliar codebases are often further protected by OWNERS files, which specify which engineers must approve a change to a given directory before it can be submitted, on top of the general reviewer's approval.
 
-Any conflicts on a code review are resolved on a step-by-step basis. The first step is where the author and reviewer try to come to consensus. This is done using guides such as the [code review standard guide](https://google.github.io/eng-practices/review/reviewer/standard.html), the [CL author guide](https://google.github.io/eng-practices/review/developer/), and the [reviewer's guide](https://google.github.io/eng-practices/review/reviewer/).
-
-If the author and reviewer cannot come to consensus, they usually opt for a face-to-face meeting or a video conference, instead of just trying to resolve the issue through code review comments. When this does not resolve the situation, it is often escalated to a broader team discussion, Technical Lead, code maintainer, or an Eng Manager. 
+Any conflicts on a code review are resolved on a step-by-step basis. The first step is where the author and reviewer try to come to consensus. This is done using guides such as the [code review standard guide](https://google.github.io/eng-practices/review/reviewer/standard.html), the [CL author guide](https://google.github.io/eng-practices/review/developer/), and the [reviewer's guide](https://google.github.io/eng-practices/review/reviewer/). On matters of style, the style guide is treated as absolute authority rather than personal opinion, and any point that's a minor nitpick rather than a blocking concern is prefixed with "Nit:" so the author knows it's optional to address in the current CL.
+ 
+If the author and reviewer cannot come to consensus, they usually opt for a face-to-face meeting or a video conference, instead of just trying to resolve the issue through code review comments (the outcome of that conversation is then recorded back onto the CL as a comment, so the reasoning isn't lost to future readers). When this does not resolve the situation, it is often escalated to a broader team discussion, Technical Lead, code maintainer, or an Eng Manager.
 
 ### 2.3. Testing
 
 Google's CI pipeline is built on the principle that the cost of a bug grows more; often exponentially, the later it is caught. This motivates catching problems as early as possible. However, as discussed before, to minimize waiting time from disruptive testing, it is split into two stages:
-
+ 
 - pre-submit tests (occur before code review)
 - post-submit tests (occur after code review and approval)
 
-Code changes that clear the pre-submit tests (and approval) have a 95%+ likelihood of passing the rest of the tests. This is treated as sufficient confidence to let these changes be integrated.
-
-After submission, Google's continuous build system, Test Automation Platform (TAP), asynchronously runs the full suite of tests. TAP handles more than 50,000 unique changes and four billion individual test cases daily. Google emphasizes in handling failing tests quickly as a failing TAP test may prevent a team from making forward progress or building a new release. Thus, failed tests are handled by the team's "Build Cop", regardless of who made the breaking change. If there is a failing test in their project, the Build Cop has to drop their current task and fix the build. 
-
+Code changes that clear the pre-submit tests (and approval) have a 95%+ likelihood of passing the rest of the tests. This is treated as sufficient confidence to let these changes be integrated, since running every test against every change at Google's scale (TAP evaluates more than one change a second) would be prohibitively slow and expensive; presubmit is deliberately a sampled, fast-feedback gate rather than an exhaustive one.
+ 
+After submission, Google's continuous build system, Test Automation Platform (TAP), asynchronously runs the full suite of tests — including larger, slower tests that are impractical to run at presubmit time — against changes at the head of the repository. TAP handles more than 50,000 unique changes and four billion individual test cases daily. Because TAP evaluates so many changes a day (more than one a second) that it can't run every test against every change, it batches related changes together, which is efficient but can obscure exactly which change in a batch broke a test; to identify the specific "culprit" change, TAP automatically splits a failing batch apart and reruns the tests against each change in isolation, and engineers also have culprit-finding tools available to binary-search through a batch by hand. This process also has to contend with "mid-air collisions," where the repository shifts between when a presubmit run starts and when a change actually lands, so that two CLs touching entirely unrelated files can combine to break a test that neither would have broken alone. Flaky tests (tests that fail intermittently, independent of the code change) complicate this further: Google's practice is to allow a temporarily flaky test to be pulled from presubmit while the flakiness is investigated, and to tag a known-failing test with its tracking bug so the test suite can stay "green" without the failure being forgotten or silently ignored.
+ 
+Google emphasizes handling failing tests quickly, as a failing TAP test may prevent a team from making forward progress or building a new release. Thus, failed tests are handled by the team's "Build Cop," regardless of who made the breaking change. If there is a failing test in their project, the Build Cop has to drop their current task and fix the build, and there is a strong cultural norm against layering new changes on top of a known-broken build. A Build Cop's most effective tool is the rollback, which restores the system to a known-good state quickly enough that TAP has since been upgraded to trigger it automatically once it has high confidence in the culprit; even so, the practice of optimistically integrating a change once it clears presubmit, rather than waiting on the full suite, keeps the average wait time to submit a change to around 11 minutes. Release-blocking issues surfaced by end-to-end test failures are additionally tracked through bug "hotlists," triaged to the responsible team so they get fixed ahead of anything non-blocking.
 
 ### 2.4. Deployment
 
-Google's CD pipeline handles the bulk of the Deployment phase. There is a continuous assembly of release candidates which are promoted and tested across a numerous environments, with only some reaching production.
-
-This process is done using tools developed by Google themselves, such as Rapid and Sisyphus.
-
+Google's CD pipeline handles the bulk of the Deployment phase. There is a continuous assembly of release candidates which are promoted and tested across numerous environments, with only some reaching production. Release engineering at Google is guided by a few explicit principles: a self-service model, where individual teams control and run their own release process rather than depending on a central release team; hermetic builds, meaning a build depends only on known, versioned tools and dependencies rather than whatever happens to be installed on the build machine, so the same revision produces identical results wherever it's built; and a preference for high release velocity, on the reasoning that frequent, smaller releases are easier to test and troubleshoot than large, infrequent ones — some teams build hourly and pick which build to promote based on test results, others adopt a "push on green" model and deploy every build that passes.
+ 
+Code is checked into a single mainline, but most major projects don't release directly from it. Instead, a release branches off the mainline at a specific revision, and bug fixes are cherry-picked from the mainline onto that branch rather than merging the branch back — which guarantees the exact contents of a release are known, since nothing else from the mainline can leak in after the branch point. A continuous test system runs unit tests against the mainline on every submitted change, and Google's convention is to cut a release at the last revision that continuous testing has already verified; those tests are then re-run against the release branch itself (since cherry-picks mean the branch's code may not exist anywhere on the mainline), with an independent test environment additionally running system-level tests against the packaged build artifacts.
+ 
+This process is done using tools developed by Google themselves, such as Rapid and Sisyphus. Software is distributed via the Midas Package Manager (MPM), which assembles a named, versioned, and signed package from a project's Blaze build rules; a package can carry a label (e.g. `dev`, `canary`, `production`) indicating its place in the release process, and re-applying a label to a newer package automatically moves that label off the old one, so that whoever fetches "the canary version" always gets the newest package still marked canary. Rapid, Google's automated release framework, is configured through blueprint files that define build and test targets, deployment rules, and project ownership; a typical Rapid release cuts a branch at a given revision, compiles and tests it via Blaze, makes the resulting artifacts available for system testing, and then performs a canary deployment — starting a few jobs in production once system tests pass — before the release is considered ready to roll out further. For simple deployments, Rapid can drive the rollout directly by updating the relevant jobs on Borg, Google's cluster management system, to point at the newly built package. For more complex deployments, Rapid hands off to Sisyphus, a general-purpose rollout automation framework built by the SRE team: Rapid creates a rollout as a long-running Sisyphus job (referencing the specific build label to deploy), and Sisyphus exposes a dashboard that gives finer-grained control over how the rollout proceeds and lets engineers monitor its progress in real time.
+ 
+The pace and shape of a rollout is matched to the risk profile of the service being deployed rather than following one fixed cadence: a pre-production environment might be built and pushed hourly, a large user-facing service might start in a single cluster before expanding exponentially to the rest of the fleet, and critical infrastructure services may be rolled out gradually over several days, interleaved across geographic regions, so that a bad release can be caught and halted before it reaches everyone. Configuration is treated with the same discipline as code — it lives in the same source repository and goes through the same review requirement — and teams choose between a few models depending on how tightly configuration needs to track a given binary: editing configuration directly at the head of the mainline (simplest, but can drift out of sync with what's actually running until jobs pick up the change); bundling configuration into the same MPM package as the binary it configures (simplest to deploy, but binds the two together); or packaging configuration into its own MPM package that's versioned and labeled alongside the binary's package, so a configuration-only fix (e.g. flipping a flag) can be cherry-picked and re-deployed without a new binary build.
 
 ### 2.5. Maintenance
 
 Sustainable maintenance and reliability is achieved in Google through continual automated monitoring (the CI pipeline) and a monitoring and alerting system:
+ 
+* The CI pipeline, as discussed before, reveals how software is responding to changes in its environment. It focuses on the earlier end of the workflow and indicates when a build is in deployable shape.
+* Production monitoring depends on passive alerts and active analysis of running systems. It focuses on the later end of the same workflow and catches problems with the running system by reporting when tracked metrics surpass some threshold.
+Google's SRE practice draws a mechanical distinction between two kinds of monitoring: black-box monitoring, which tests the system from the outside the way a user would experience it and is symptom-oriented ("the system isn't working right now"); and white-box monitoring, which instruments the internals of the system and can catch problems before they become user-visible. Google combines heavy use of white-box monitoring with a smaller, more critical set of black-box checks, on the reasoning that a page should only wake a human up when a problem is both real and user-visible. Where a specific set of metrics is needed, Google's own guidance narrows it to four "golden signals": latency (how long requests take, tracked separately for successful vs. failed requests), traffic (demand on the system), errors (the rate of failed requests), and saturation (how full or close to capacity the system is). Alerting rules are written to distinguish "what" is broken (the symptom) from "why" it's broken (the cause), since conflating the two tends to produce noisy, hard-to-act-on alerts.
+ 
+Google's monitoring system focuses on collecting information such as query counts and types, error counts and types, and server lifetimes. This information is then used to guide decision-making for satisfying service level objectives, or SLOs (i.e. a target level of reliability for the system, such as a target error rate or latency), set by the site reliability team; the gap between an SLO and actual performance functions as an "error budget" that teams can spend on risk, such as shipping a faster but less-tested release.
+ 
+Different alerts reach people in different ways. A page is reserved for the urgent, symptom-level breaches described above: it routes to whichever engineer is currently primary on-call for that service (Google runs 24/7 on-call rotations, generally shared between the SWEs who build the service and the SREs who run it, often with a secondary on-call as backup if the primary doesn't acknowledge in time), and once acknowledged, that engineer is expected to drop other work and triage the problem ahead of nearly anything else, including project work. Lower-urgency issues that don't need someone paged at 3am — a metric drifting in the wrong direction, a non-blocking regression — are instead filed as a ticket or bug for the on-call engineer to work through during business hours, using the same bug-tracking mechanism as the release-blocking hotlists mentioned in 2.3. If the on-call engineer can't resolve an incident alone, or it's serious enough that its scope isn't yet clear, Google's guidance is to escalate early: pulling in the service owners, other on-call teams, or a more formal incident-management protocol, rather than letting one person sit on an ambiguous, worsening problem. It's this chain of page, triage, and escalate if needed that produces the timeline of events a postmortem is later written from.
 
-* The CI pipeline, as discussed before, reveals how software is responding to changes in its environment. It focuses on the earler end of the workflow and indicates when a build is deployable shape.
-
-* Production monitoring depends on passive alerts and active analysts of running systems. It focuses on the later end of the same workflow and catches problems with the running system by reporting when tracked metrics surpass some threshold.
-
-Google monitoring system focuses on collecting information such as query counts and types, errors counts and types, and server lifetimes. This information is then used to guide decision-making for satisfying service level objectives (i.e. target level of reliability of the system) set by the site reliabilty team. Google deals with incidents by adhering to a "blameless postmortem culture", encompasses investigating and documenting incidents with goal of understanding and fixing the root problem, rather than avoiding or minimizing it and blaming others. 
+When an incident does occur despite this, Google deals with it by adhering to a "blameless postmortem culture," which encompasses investigating and documenting incidents with the goal of understanding and fixing the root problem. They typically produce a written timeline of the incident, its root cause, and a set of concrete follow-up action items, rather than avoiding or minimizing it and assigning blame to individuals.
 
 ## 3. Human approval gates
 
-## 4. Mechanics inside each stage
+- **Design (2.1):** the design doc itself is the gate. A major project isn't expected to start implementation until the doc has been through review and discussion, sometimes including domain experts (security, privacy, internationalization) signing off on their respective sections.
+- **Development (2.2):** a CL cannot be submitted without a human reviewer's approval ("LGTM"); OWNERS files add a second, directory-specific approval requirement on top of that for sensitive parts of the codebase. Unresolved disagreement between author and reviewer escalates through a defined human chain, starting with face-to-face discussion, then discussions with Technical Lead, code maintainer, or Eng Manager.
+- **Testing (2.3):** Build Cops make the actual call on a failure/break: roll back or fix forward. TAP's automatic rollback only fires once it already has high confidence in the culprit; up to that point the decision sits with a person.
+- **Deployment (2.4):** Google's release engineering docs list a specific set of "gated operations" behind role-based access control: approving source code changes, approving the initial build proposal and any subsequent cherry picks, and authorizing the actual deployment of a release. Rollout *pace* (hourly vs. multi-day) is the separate, built-in caution mechanism layered on top of that gate.
+- **Maintenance (2.5):** the on-call engineer decides whether/how to escalate a page; SLO targets and the error budget they create are set by the site reliability team, not derived automatically; and a postmortem is written and reviewed by people, with the "blameless" framing itself being a deliberate human-culture choice rather than a process default.
 
-## 5. Where AI appears and where it does not
+## 4. Where AI appears and where it does not
 
-## 6. What the papers say
+## 5. What the papers say
 
-## 7. Borrow
+## 6. Borrow
 At least two ideas we should take into our model, each with a reason.
 
 1.
 2.
 
-## 8. Reject
+## 7. Reject
 
-## 9. Open questions
+## 8. Open questions
 
 

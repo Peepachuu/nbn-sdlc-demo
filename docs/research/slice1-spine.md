@@ -184,7 +184,7 @@ Mechanics:
 
 ---
 
-## Stage 8: Deployment and iteration (baseline: not reached, zero evidence)
+## Stage 8: Deployment and iteration (baseline: not reached, no evidence)
 
 No baseline evidence exists. Everything here is from external sources, as the requirements file instructs, and the classification is provisional until a deploy environment exists.
 
@@ -206,7 +206,7 @@ Mechanics:
 
 ---
 
-## The stage order: challenged as a strict sequence
+## The stage order
 
 Verdict: challenged as a strict linear sequence. Defensible only as a taxonomy of concerns.
 
@@ -221,7 +221,7 @@ This challenge agrees with Alessio rather than contradicting him. In the Tuesday
 
 Recommendation: present the eight stages as a spine of concerns that recur, not as a phase-gated waterfall, and say so on the map.
 
-## The migration claim: supported and contradicted
+## The migration claim
 
 Supporting evidence:
 
@@ -238,7 +238,7 @@ Contradicting evidence:
 
 Verdict: the migration claim is supported in direction but conditional. Stages move toward green only where the seven DORA capabilities are present. Without them, AI amplifies dysfunction and stability regresses. The map should annotate each amber and green with its governance preconditions rather than imply automatic drift.
 
-## Empirical backing (cross-cutting)
+## Empirical evidence
 
 - Productivity RCTs, contested. Peng, Kalliamvakou, Cihon, Demirer ([arXiv 2302.06590](https://arxiv.org/abs/2302.06590); Microsoft Research/GitHub/MIT): +55.8% task speed (95% CI 21 to 89%; p=0.0017) on a bounded HTTP-server task, n=95 freelancers, so a wide CI and an artificial task. Cui, Demirer, Jaffe, Musolff, Peng & Salz field experiments across Microsoft, Accenture and a Fortune 100 firm (Management Science 2025; n=4,867 developers): +26.08% completed pull requests (SE 10.3%), a smaller and noisier field effect. METR 2025 ([arXiv 2507.09089](https://arxiv.org/abs/2507.09089)): −19% for experienced developers on mature repos. Read together: gains are real for greenfield and boilerplate, negative for expert work on complex codebases.
 - Security and quality. Veracode 2025 (45% insecure-choice rate; Java 72%, XSS 86%, log injection 88% failure); Apiiro (CVSS 7.0+ vulnerabilities about 2.5× more frequent in AI code; about 10,000 new findings a month by mid-2025, via CSO Online and other secondary reporting of Apiiro's study); Pearce et al. (about 40% of Copilot code vulnerable, now in *Communications of the ACM* 68(2), Feb 2025).
@@ -258,7 +258,9 @@ Methodology flags. The strongest pro-AI RCT (Peng) uses an artificial task and f
 5. Stage 8 in practice. The baseline never reached deployment; a live environment is needed to test whether AI-assisted rollback and incident response are viable at all.
 6. Journey-map accuracy. No empirical validation exists. This is a research gap the UX slice could contribute to.
 
-## Recommendations (proposals for the team, not applied above)
+## Recommendations
+
+These are proposals for the team and Alessio; none are applied in the stage sections above.
 
 1. Adopt the map as a taxonomy of recurring concerns, not a waterfall. Add a visible note that Google and Microsoft practice implies iteration, concurrency, and DevOps merging of Stages 6 to 8. If stakeholders read it as phase-gated, redraw it as a loop.
 2. Propose Stage 2 move from GREEN to AMBER, with the reason recorded (the RE literature shows a persistent human-acceptance gap). This is the single highest-value correction, and it is backed by peer-reviewed evidence. It is Alessio's framework and the client has seen it, so this goes to him as a challenge, not a change.

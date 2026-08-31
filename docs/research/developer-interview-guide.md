@@ -1,7 +1,7 @@
 # Developer Interview Discussion Guide
 
 **Draft prepared by:** Ahmed Falulur Rahuman  
-**Planner card:** PRD-8 — Developer interviews, guide and outreach
+**Planner card:** PRD-8 - Developer interviews, guide and outreach
 
 ## Purpose
 
@@ -11,7 +11,7 @@ Use developer interviews to validate, challenge, or add to the open questions fr
 
 Thanks for taking the time to speak with us. Our RMIT capstone project looks at how AI can be used across the software development lifecycle.
 
-We have already completed some research, and we would like to compare it with your experience as a developer. There are no right or wrong answers — we are mainly interested in what you have seen work well, what has not worked, and what you would want to see improved.
+We have already completed some research, and we would like to compare it with your experience as a developer. There are no right or wrong answers - we are mainly interested in what you have seen work well, what has not worked, and what you would want to see improved.
 
 ---
 
@@ -25,7 +25,7 @@ We have already completed some research, and we would like to compare it with yo
 - Are there parts of your workflow where you rarely or never use it?
 - Does your use change depending on the risk or complexity of the task?
 
-**Research trace:** Slice 1 Open Question 3 — governance thresholds; establishes where developers currently use AI and how task risk or complexity affects that use.
+**Research trace:** Slice 1 Open Question 3 - governance thresholds; establishes where developers currently use AI and how task risk or complexity affects that use.
 
 ---
 
@@ -37,7 +37,7 @@ We have already completed some research, and we would like to compare it with yo
 - What kinds of work does it handle poorly?
 - How does it perform on large, complex, or older codebases?
 
-**Research trace:** Slice 1 Open Question 3 — governance thresholds; D2 gaps around complex logic, legacy systems, and enterprise-scale development.
+**Research trace:** Slice 1 Open Question 3 - governance thresholds; D2 gaps around complex logic, legacy systems, and enterprise-scale development.
 
 ---
 
@@ -47,7 +47,7 @@ We have already completed some research, and we would like to compare it with yo
 
 - How would you validate the result with real users or stakeholders?
 
-**Research trace:** Slice 1 Open Question 6 — journey-map accuracy and validation of AI-generated user or requirements artifacts.
+**Research trace:** Slice 1 Open Question 6 - journey-map accuracy and validation of AI-generated user or requirements artifacts.
 
 ---
 
@@ -59,7 +59,7 @@ We have already completed some research, and we would like to compare it with yo
 - Does the amount of checking change depending on the task?
 - Are there checks you think should always happen before approval?
 
-**Research trace:** Slice 1 Open Question 1 — approval-gate design; D2 gap — verification.
+**Research trace:** Slice 1 Open Question 1 - approval-gate design; D2 gap - verification.
 
 ---
 
@@ -68,9 +68,9 @@ We have already completed some research, and we would like to compare it with yo
 **Follow-ups if useful:**
 
 - What would you want to know if you had to investigate the change later?
-- Which details would be useful to record—for example, the tool, prompt, changes made, or reviewer?
+- Which details would be useful to record-for example, the tool, prompt, changes made, or reviewer?
 
-**Research trace:** Slice 1 Open Question 2 — auditability.
+**Research trace:** Slice 1 Open Question 2 - auditability.
 
 ---
 
@@ -81,7 +81,7 @@ We have already completed some research, and we would like to compare it with yo
 - Does responsibility change depending on how much the AI contributed?
 - What role should the developer or reviewer have?
 
-**Research trace:** D2 gap — liability and authorship.
+**Research trace:** D2 gap - liability and authorship.
 
 ---
 
@@ -93,7 +93,7 @@ We have already completed some research, and we would like to compare it with yo
 - What checks or restrictions should sit outside the AI itself?
 - How should security, legal, accessibility, or organisational rules be enforced when AI is involved?
 
-**Research trace:** Slice 1 Open Question 4 — prompt-injection and supply-chain risk; Slice 1 Open Question 7 — regulatory codification.
+**Research trace:** Slice 1 Open Question 4 - prompt-injection and supply-chain risk; Slice 1 Open Question 7 - regulatory codification.
 
 ---
 
@@ -105,7 +105,7 @@ We have already completed some research, and we would like to compare it with yo
 - Are there tasks where you would still want a human to make the final decision?
 - Would your answer change for deployment, rollback, or incident response?
 
-**Research trace:** Slice 1 Open Question 3 — governance thresholds; Slice 1 Open Question 5 — Stage 8 in practice.
+**Research trace:** Slice 1 Open Question 3 - governance thresholds; Slice 1 Open Question 5 - Stage 8 in practice.
 
 ---
 

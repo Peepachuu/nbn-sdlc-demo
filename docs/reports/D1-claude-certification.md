@@ -81,14 +81,25 @@ Three lessons matter beyond their apparent scope:
 - **"Validating skills for plugins"** - a verification step before a skill is shared
 - **"Share what you build with your team"** - distribution across a team
 
-
-
-
 ---
 
 ## 3. Capability inventory
+For each mechanism: what it automates, where it stops, and what that means for the lifecycle model. The middle column is the constraint the map must respect.
 
+| Mechanism | What it can automate | Where it stops | Implication for the model |
+|---|---|---|---|
+| **Hook** | Runs deterministically at a defined trigger. Blocks commands, enforces formatting, fires notifications | Pattern-matching only. Cannot assess intent, quality or correctness | Enforces a rule reliably. Suitable as a hard gate. Cannot make a judgement |
+| **Skill** | Packages a repeatable procedure as reusable instructions the model applies to matching tasks | Invocation is steerability-dependent, therefore probabilistic. Not guaranteed to fire | Assists. **Cannot serve as a control**, because a control that sometimes does not run is not a control |
+| **Sub-agent** | Handles a scoped task in separate context and keeps the main conversation clean | Same class of system as the agent it checks. Subject to the identical four machine properties | **Not independent verification.** An agent checking an agent is not an oracle |
+| **Command** | Predictable, scoped, explicitly triggered | Requires a human to fire it | Human-initiated by definition. Sits naturally at red-tier boundaries |
+| **MCP server** | Connects the model to external tools and data sources | Output quality is bounded by what it is pointed at. Introduces an external trust surface | Context quality is a precondition for any amber-to-green migration, not a given |
+| **CLAUDE.md** | Persistent project memory and standing instruction | Instructions are followed probabilistically, per steerability | Improves consistency. Does not guarantee compliance |
 
+**The distinction the map depends on: a hook can enforce but only a human can judge.**
+
+Everything else in the inventory sits between those two poles. Skills, sub-agents and CLAUDE.md all shape behaviour without guaranteeing it, which places them in amber rather than green.
+
+**And the corollary, which answers an open question from the client meeting.** Alessio asked whether all the tests are correct when a sub-agent writes them. Section 2.4 supplies the answer in principle: a sub-agent is subject to the same next-token-prediction and steerability properties as the agent whose work it is checking. It can widen coverage. It cannot function as an independent oracle. A human check on AI-written tests is therefore structural, not a matter of current model quality.
 
 ---
 
@@ -104,8 +115,17 @@ Three lessons matter beyond their apparent scope:
 ---
 
 ## 6. Gaps
+What the certification does not supply that the model still needs.
 
+**Provenance and audit trail.** Nothing in the path covers recording which model, which prompt and which configuration produced a given output. Leon Gouletsas observed the same absence at NBN, describing the missing artefact as a "nutrition label" for AI-generated material. This is a gap in available practice, not only in our knowledge.
 
+**Token and cost accounting.** Named as a deliverable in the client brief. Not addressed anywhere in the certification path.
+
+**Verifying a sub-agent's work.** The mechanism is taught; the oracle problem is not solved. Section 3 explains why it cannot be solved by adding another agent.
+
+**Correction to an earlier assumption.** We previously recorded that the certification says nothing about how a team shares what works. That was wrong. The Cowork course covers plugins as a way to encode team expertise, a validation step before a skill is shared, and distribution across a team.
+
+This makes Leon's NBN observation sharper rather than weaker. He found individuals running separate instances with no process for sharing what they learn, and NBN staff unable to describe how institutional knowledge develops. **The mechanism exists and is taught. It is not being used.** That is a governance and enablement gap rather than a tooling gap, and it belongs in the model as one.
 
 ---
 

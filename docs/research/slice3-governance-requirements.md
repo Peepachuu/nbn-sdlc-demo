@@ -14,9 +14,31 @@ Slice 1 tested the map's colours. Slice 2 went inside the build stages. Slice 3 
 
 Same rule as the other slices. Nothing is invented. Every claim is documented practice (cited), observed in the workshop record (D2 v2), demonstrated in our repository, or practitioner input from Leon (26 and 31 Aug, recorded). Where a source is a policy or a piece of legislation, it is fetched and quoted, and the fetch date is recorded.
 
-## 2. Acceptance criteria
+## 2. Acceptance criteria (from the card checklist, transcribed 2 Sep)
 
-The card has six checklist items. They are not yet transcribed here; Zac to paste them in before the draft is marked done. Until then the slice 2 criteria apply: committed to `docs/research/` via PR, card comment naming who it unblocks, concrete mechanics per module with a stated gap where none exists, master doc entry, reconciliation lines against the sources used.
+| # | Criterion | How to satisfy it |
+|---|---|---|
+| 1 | Committed the day it is agreed, with a comment naming who it unblocks | PR merged the day the module list is agreed; card comment tags Ahmed, Sidney, Zac (D3) |
+| 2 | At least three concrete mechanics per module, not stage labels | Each of the six modules lists three things a person or a hook actually does, with the source. Where none exists, say so |
+| 3 | Prompt practice covered: how prompts are written, stored, versioned, shared | Module 5 has to cover all four verbs. Stored and versioned means prompts as files in the repository (skills, CLAUDE.md, issue templates); shared means the Cowork plugin path D1 s2.6 describes and the sharing gap Leon observed at NBN |
+| 4 | Does not re-cut the spine slice 1 fixed | Cite slice 1 by section; restate no verdict. Where the Guidance for AI Adoption supersedes a source slice 1 cites, record it as a note to slice 1, not a change to it |
+| 5 | Committed to /docs/research | `docs/research/slice3-governance.md` via PR to `main` |
+| 6 | Update Master Doc | Entry using the existing template, Git URL = the PR |
+
+Card notes, verbatim: "Wk3 - The four collaboration patterns the workshop teams invented. Adds token accounting, liability, code authorship, and how prompts are written, stored, versioned and shared."
+
+Criterion 3 widens Module 5 beyond what section 3 first proposed. Prompt practice is still time-boxed, but "stored, versioned, shared" makes it a mechanics module, not a section: the repository's `.claude/skills/`, `CLAUDE.md`, `.github/pull_request_template.md` and issue templates are the storage and versioning mechanics, and the plugin path is the sharing mechanic.
+
+### What D3 needs from this slice
+
+D3 (assemble and reconcile the slices, due 4 Sep on the card, proposed 6 Sep) has twelve checklist items. Four of them depend on things that do not yet exist and are recorded here so they are not discovered on the day:
+
+- A comparison table across Google, Atlassian, Microsoft and Anthropic. There are source notes for Google and Microsoft only. Anthropic can be covered from D1 (the certification is the Anthropic source) and from the Claude Code documentation slice 2 cites. Atlassian has no source at all; either a short source note is written before D3 or the table records the column as not researched.
+- The module list agreed by the whole team at the Thursday reconvene. That meeting is the gate for criterion 1 above.
+- Interview findings incorporated. Ahmed's developer interviews; none recorded as complete on 2 Sep.
+- Anything that changes a requirement Ahmed already wrote raised with him first. Module 2 (guardrails) and Module 6 (regulation) are the likely places.
+
+D3's path is `docs/reports/D3-sdlc-research.md`, not `docs/research/`.
 
 ## 3. Proposed module list
 

@@ -82,7 +82,6 @@ Three lessons matter beyond their apparent scope:
 - **"Share what you build with your team"** - distribution across a team
 
 ---
-
 ## 3. Capability inventory
 For each mechanism: what it automates, where it stops, and what that means for the lifecycle model. The middle column is the constraint the map must respect.
 
@@ -102,15 +101,33 @@ Everything else in the inventory sits between those two poles. Skills, sub-agent
 **And the corollary, which answers an open question from the client meeting.** Alessio asked whether all the tests are correct when a sub-agent writes them. Section 2.4 supplies the answer in principle: a sub-agent is subject to the same next-token-prediction and steerability properties as the agent whose work it is checking. It can widen coverage. It cannot function as an independent oracle. A human check on AI-written tests is therefore structural, not a matter of current model quality.
 
 ---
-
 ## 4. Team baseline
+| Member | Role | Path | Completed | Time |
+|---|---|---|---|---|
+| Zac Clarkson | UX | Base + Cowork | 20 Aug | ~2 hrs |
+| Chirag Wadehra | Dev 2 | Base + Claude Code 101 | 21 Aug | ~2 hrs |
+| Sidney Zeng | PM | Base + Cowork | 22–23 Aug | ~2 hrs |
+| Ahmed Falulur Rahuman | BA | Base + Cowork | 23 Aug | ~2 hrs |
+| Zafir Hasan | Dev 1 | Base + Claude Code 101 | 23 Aug | ~2 hrs |
 
-
+All twenty certificates verified. Links recorded on the Master Document. 
 
 ---
-
 ## 5. Candidate applications
+Each tied to a lifecycle stage from research slice 1. The final column is the deliverable: it is the human check the map must show.
 
+| # | Stage | Mechanism | What it automates | What a human still checks |
+|---|---|---|---|---|
+| 1 | Requirements and discovery | Skill | Drafts user stories from a research slice | Acceptance criteria, coverage diversity, prioritisation. Slice 1 found LLM stories meet acceptance criteria less often than human ones |
+| 2 | Solution design | Skill | Drafts an ADR from a design discussion | Whether the rejected alternatives were real options, and whether the stated consequences are honest |
+| 3 | Development and build | Sub-agent | Reads the issue, plans, branches, implements, opens a PR | Whether the implementation matches the acceptance criteria as written, not as the agent inferred them |
+| 4 | Development and build | Hook | Blocks direct pushes to `main` and enforces Conventional Commits | Nothing. Deterministic rule, correctly automated. Already live in our repository |
+| 5 | Testing and QA | Sub-agent | Generates a test suite from acceptance criteria | Whether each test traces to a stated criterion, and whether the same party wrote both implementation and tests |
+| 6 | Testing and QA | Hook | Blocks merge on failing CI or a failed dependency audit | Nothing. Deterministic gate. Already live |
+| 7 | Deployment | Command | Human-triggered promotion to production | The deploy decision itself. Red tier |
+| 8 | Cross-cutting | MCP server | Supplies live documentation and repository context | What the server is pointed at, and whether that source is current and trustworthy |
+
+Items 4 and 6 are worth noting: both are already running in the team repository, and both are green-tier because they are hooks. That is the pattern — the steps safely automated are the deterministic ones.
 
 ---
 
@@ -128,12 +145,15 @@ What the certification does not supply that the model still needs.
 This makes Leon's NBN observation sharper rather than weaker. He found individuals running separate instances with no process for sharing what they learn, and NBN staff unable to describe how institutional knowledge develops. **The mechanism exists and is taught. It is not being used.** That is a governance and enablement gap rather than a tooling gap, and it belongs in the model as one.
 
 ---
-
 ## 7. Handoff
+**Feeds D4, the lifecycle map.**
 
+- Section 3 supplies the mechanism-to-capability mapping. Where the map claims an agent performs a step, the "where it stops" column is the limit on what can be claimed.
+- Section 5 supplies eight candidate applications with their human checks, tied to slice 1 stages.
+- Section 2.4's four machine properties give a principled basis for the colour boundaries: a step can only be green where its failure modes are caught deterministically.
+- Section 6 lists what the map must not overstate.
 
 ---
-
 ## Sources
 
 Anthropic Academy, [anthropic.skilljar.com](https://anthropic.skilljar.com).

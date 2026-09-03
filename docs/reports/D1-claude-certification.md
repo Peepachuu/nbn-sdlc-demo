@@ -40,7 +40,7 @@ Built with Prof. Joseph Feller (University College Cork) and Prof. Rick Dakan (R
 |---|---|---|
 | **Delegation** | Deciding what to hand to the model and what to keep, including project planning | This is the same judgement the map makes at every box. Red, amber and green are delegation decisions |
 | **Description** | Communicating the task clearly; includes a deep dive on effective prompting | Feeds the prompt practice module named in the client brief |
-| **Discernment** | Evaluating what comes back — process, output and performance | This is the human check. It is what a reviewer does |
+| **Discernment** | Evaluating what comes back such as process, output and performance | This is the human check. It is what a reviewer does |
 | **Diligence** | Responsibility and accountability for AI-assisted work | This is the client's liability question in the framework's own vocabulary |
 
 The course also teaches the **Description-Discernment loop** as an explicit cycle: describe, evaluate, refine. That loop is the operational shape of every amber-tier step in our model.
@@ -61,7 +61,7 @@ Anthropic describes it as the companion to AI Fluency: where the 4D framework te
 
 The course's stated outcome is that a learner can look at an unexpected output, recognise which kind of unexpected it is, and respond with a targeted fix.
 
-**This is the section of the certification that maps most directly onto our model.** Each property predicts a class of failure, and each class of failure implies where a human check belongs. Steerability in particular is the reason a rules file cannot serve as a governance control which was a point our workshop review reached independently.
+**This is the section of the certification that maps most directly onto our model.** Each property predicts a class of failure, and each class of failure implies where a human check belongs. Steerability in particular is the reason a rules file cannot serve as a governance control. That is a point our workshop review reached independently.
 
 ### 2.5 Claude Code 101 (developers)
 
@@ -87,7 +87,7 @@ For each mechanism: what it automates, where it stops, and what that means for t
 
 | Mechanism | What it can automate | Where it stops | Implication for the model |
 |---|---|---|---|
-| **Hook** | Runs deterministically at a defined trigger. Blocks commands, enforces formatting, fires notifications | Pattern-matching only. Cannot assess intent, quality or correctness | Enforces a rule reliably. Suitable as a hard gate. Cannot make a judgement |
+| **Hook** | Runs deterministically at a defined trigger. Blocks commands, enforces formatting, fires notifications | Cannot assess intent, quality or correctness | Enforces a rule reliably. Suitable as a hard gate. Cannot make a judgement |
 | **Skill** | Packages a repeatable procedure as reusable instructions the model applies to matching tasks | Invocation is steerability-dependent, therefore probabilistic. Not guaranteed to fire | Assists. **Cannot serve as a control**, because a control that sometimes does not run is not a control |
 | **Sub-agent** | Handles a scoped task in separate context and keeps the main conversation clean | Same class of system as the agent it checks. Subject to the identical four machine properties | **Not independent verification.** An agent checking an agent is not an oracle |
 | **Command** | Predictable, scoped, explicitly triggered | Requires a human to fire it | Human-initiated by definition. Sits naturally at red-tier boundaries |
@@ -120,17 +120,18 @@ Each tied to a lifecycle stage from research slice 1. The final column is the de
 |---|---|---|---|---|
 | 1 | Requirements and discovery | Skill | Drafts user stories from a research slice | Acceptance criteria, coverage diversity, prioritisation. Slice 1 found LLM stories meet acceptance criteria less often than human ones |
 | 2 | Solution design | Skill | Drafts an ADR from a design discussion | Whether the rejected alternatives were real options, and whether the stated consequences are honest |
-| 3 | Development and build | Sub-agent | Reads the issue, plans, branches, implements, opens a PR | Whether the implementation matches the acceptance criteria as written, not as the agent inferred them |
-| 4 | Development and build | Hook | Blocks direct pushes to `main` and enforces Conventional Commits | Nothing. Deterministic rule, correctly automated. Already live in our repository |
+| 3 | Development and build | Agent | Reads the issue, plans, branches, implements, opens a PR | Whether the implementation matches the acceptance criteria as written, not as the agent inferred them |
+| 4 | Development and build | Hook | Blocks direct pushes to `main` and enforces Conventional Commits | Enforces Conventional Commits. Live (lefthook commit-msg). The push-to-main block is a GitHub ruleset that exists but is not targeting main as of 3 Sep; see slice 2, gaps 3. |
 | 5 | Testing and QA | Sub-agent | Generates a test suite from acceptance criteria | Whether each test traces to a stated criterion, and whether the same party wrote both implementation and tests |
-| 6 | Testing and QA | Hook | Blocks merge on failing CI or a failed dependency audit | Nothing. Deterministic gate. Already live |
+| 6 | Testing and QA | Hook | Blocks merge on failing CI or a failed dependency audit | CI and dependency audit run on every PR. Live. Merge is not blocked on failure: no required status checks are configured |
 | 7 | Deployment | Command | Human-triggered promotion to production | The deploy decision itself. Red tier |
 | 8 | Cross-cutting | MCP server | Supplies live documentation and repository context | What the server is pointed at, and whether that source is current and trustworthy |
 
-Items 4 and 6 are worth noting: both are already running in the team repository, and both are green-tier because they are hooks. That is the pattern — the steps safely automated are the deterministic ones.
+Items 4 and 6 were written as live controls. They are not. The commit-message hook is genuinely enforcing; the push-to-main block and the CI gate are not, because a ruleset exists that targets no branches and no required status checks are configured. Every mechanism named here is capable of holding a gate. Only one of them currently does.
+
+The distinction between a control that exists and a control that is switched on is not something the certification teaches, and it is the second time this team has found the gap in its own practice rather than in the literature.
 
 ---
-
 ## 6. Gaps
 What the certification does not supply that the model still needs.
 
@@ -154,7 +155,7 @@ This makes Leon's NBN observation sharper rather than weaker. He found individua
 - Section 6 lists what the map must not overstate.
 
 ---
-## Sources
+## Sources retrieved 3 September 2026
 
 Anthropic Academy, [anthropic.skilljar.com](https://anthropic.skilljar.com).
 

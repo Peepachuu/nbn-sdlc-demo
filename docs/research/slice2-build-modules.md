@@ -16,7 +16,7 @@ Where the repository's documentation and its history disagree, the history wins 
 
 ### The story
 
-A junior developer picks up a card from the board: "add a notes feature." Before any AI touches anything, two artifacts already exist, and they are the whole trick. The issue describes the task with its acceptance criteria written out, and those acceptance criteria also live in the repository as a Markdown file. When the developer (or an agent) starts work, the prompt doesn't paste context in, it points at the file by name: "implement issue #41 against the criteria in `docs/acceptance/notes.md`." The repository is the shared memory, so every person and every agent reads the same brief.
+A junior developer picks up a card from the board: "add a notes feature." Before any AI touches anything, two artifacts already exist, and they are the whole trick. The issue describes the task with its acceptance criteria written out, and those acceptance criteria also live in the repository as a Markdown file. When the developer (or an agent) starts work, the prompt points at the file by name instead of pasting context in: "implement issue #41 against the criteria in `docs/acceptance/notes.md`." The repository is the shared memory, so every person and every agent reads the same brief.
 
 This pattern wasn't handed down from Google. Several teams at the NBN workshop invented it independently on the day, because it routes around the thing that burned every team: chat tools don't share context, Git does (D2 v2, section 7.3).
 
@@ -32,7 +32,7 @@ git push -u origin feature/notes
 gh pr create --base main
 ```
 
-`main` is protected: no direct pushes, everything through a PR, CI green before merge. Branch names are flags for reviewers, not machinery; `hotfix/` just says "urgent" out loud.
+`main` is documented as protected (no direct pushes, everything through a PR, CI green before merge), though gap 3 records that the rule is not currently in force. Branch names are flags for reviewers; `hotfix/` just says "urgent" out loud.
 
 With an agent in the loop, the entry point moves but the shape holds. GitHub's coding agent is assigned the issue itself (set Copilot as assignee); it reads the issue, explores the repo for context, works on its own branch, and opens a draft PR, so "issue to branch" becomes one step, with the branch and PR created for you (docs.github.com). Claude Code does the same from a prompt that names the issue. Either way the issue is the contract: an agent given a vague issue produces a vague branch.
 
@@ -42,13 +42,13 @@ A person decides what becomes an issue and what its acceptance criteria say. Tha
 
 ### The failure mode
 
-Scope creep per branch. Agent-authored PRs bundle multiple purposes at over three times the human rate (40.0% vs 12.2%, Watanabe et al., [arXiv 2509.14745](https://arxiv.org/abs/2509.14745)), and "too large to review" is a leading rejection reason. The fix is enforced at this end, not at review: one issue, one branch, one describable change. If the issue can't be described in one sentence, it's two issues. Google's small-CL rule ("write CLs that are smaller than you think you need") is the same discipline with forty years of scale behind it.
+Scope creep per branch. Agent-authored PRs bundle multiple purposes at over three times the human rate (40.0% vs 12.2%, Watanabe et al., [arXiv 2509.14745](https://arxiv.org/abs/2509.14745)), and "too large to review" is a leading rejection reason. The fix belongs at this end rather than at review: one issue, one branch, one describable change. If the issue can't be described in one sentence, it's two issues. Google's small-CL rule ("write CLs that are smaller than you think you need") is the same discipline with forty years of scale behind it.
 
 ### Colour
 
-Task-level, per Leon's framing (31 Aug): drafting the issue text and acceptance criteria from a feature request is green-to-orange work (generation against known context, human approves). Deciding that the work should happen, and what done means, is red. The branch mechanics are neither, they're deterministic tooling.
+Task-level, per Leon's framing (31 Aug): drafting the issue text and acceptance criteria from a feature request is green-to-orange work (generation against known context, human approves). Deciding that the work should happen, and what done means, is red. The branch mechanics are deterministic tooling and carry no colour.
 
-Gate mechanism (D1 s3): human. Definition of Ready is a checklist a person walks through, not a hook. Nothing in this module runs deterministically except the branch protection on `main`, which belongs to Module 3.
+Gate mechanism (D1 s3): human. Definition of Ready is a checklist a person walks through, not a hook. Nothing in this module runs deterministically except the branch protection on `main`, which belongs to Module 3 (and, per gap 3, is documented rather than in force).
 
 ---
 
@@ -134,7 +134,7 @@ The second failure is at merge. GIT-WORKFLOW.md says every PR is squash-merged s
 
 Task-level: drafting the PR description from the commits is green. Reviewing is red; it is the judgement D1 says only a human can make. The agent's revisions in response to review are amber, with the reviewer approving again.
 
-Gate mechanism (D1 s3): CI check (the four jobs, branch protection) and human (the approval). Nothing in this module is held by a skill or a CLAUDE.md line; `/git-feature` and `/verify` are conveniences that make the person and the agent do the same thing, not gates.
+Gate mechanism (D1 s3): CI check (the four jobs, branch protection) and human (the approval). Nothing in this module is held by a skill or a CLAUDE.md line; `/git-feature` and `/verify` are conveniences that make the person and the agent do the same thing; neither is a gate.
 
 ---
 

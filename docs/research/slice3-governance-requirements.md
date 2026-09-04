@@ -53,7 +53,7 @@ Six modules. The first four are written from material already in the record; the
    - NBN Co is a wholly owned Government Business Enterprise under the National Broadband Network Companies Act 2011, directed by a Statement of Expectations from its Shareholder Ministers (current statement issued December 2024; the department also publishes the 2021 one). It is a corporate Commonwealth entity, not a department.
    - The Digital Transformation Agency's Policy for the responsible use of AI in government (version 2.0) binds non-corporate Commonwealth entities. On the fetched text it does not bind GBEs. So the accountable-official, AI-use-register and transparency-statement requirements are the nearest applicable model for NBN Co rather than an obligation, and the slice has to say so rather than assume.
    - The Voluntary AI Safety Standard (5 Sep 2024, ten guardrails) was superseded on 21 Oct 2025 by the Guidance for AI Adoption and its six essential practices: decide who is accountable; understand impacts and plan accordingly; measure and manage risks; share essential information; test and monitor; maintain human control. Any source still citing the ten guardrails is out of date. (Checked: neither slice 1 nor slice 2 cites it.)
-   - Still to fetch: the Privacy Act 1988 and the Australian Privacy Principles as they apply to NBN Co as an organisation; the Telecommunications Act 1997 obligations relevant to customer data; the Disability Discrimination Act 1992 and the WCAG 2.2 expectation the workshop already treated as definition of done (D2 s9, Siteimprove); NBN Co's Reconciliation Action Plan and any First Nations design policy it publishes; the Security of Critical Infrastructure Act 2018 (NBN is critical infrastructure).
+   - Fetched 2 Sep and written into Module 6 (see the citation record in the draft): the Privacy Act 1988 and the Australian Privacy Principles as they apply to NBN Co as an organisation; the Telecommunications Act 1997 obligations relevant to customer data; the Disability Discrimination Act 1992 and the WCAG 2.2 expectation the workshop already treated as definition of done (D2 s9, Siteimprove); NBN Co's Reconciliation Action Plan and any First Nations design policy it publishes; the Security of Critical Infrastructure Act 2018 (NBN is critical infrastructure). Not fetched: the Telecommunications Act 1997 customer-data obligations; Module 6 covers customer data through the Privacy Act and the APPs only, and the Telecommunications Act is recorded as an open item for D3.
    The module ends with the codification: for each binding rule, the mechanism that holds it (hook, deny rule, CI check, or a human sign-off) per D1 s3, and a plain statement of which rules cannot be codified and stay red.
 
 Marked slot, all modules: Leon's "Trust in AI Design" deck (clarity, control and ongoing trust; model cards, audit logs, fallback and escalation, user override, multi-agent critique, feedback loops, responsible AI policy, version control). Named as a slice 3 source in slice 1. Not in the team folder as of 2 Sep; requested. The draft does not wait for it; its outline from the 26 Aug meeting is cited as practitioner input until the file arrives.
@@ -67,20 +67,21 @@ Slice 1 raised governance as open questions (approval-gate design, auditability,
 | Input | Status |
 |---|---|
 | D2 v2 s4.2, 4.4, 4.5, 7.1, 7.3, 7.5, 9, 10 | done |
-| D1 s2.3, 2.4, 2.6, 3, 6 (branch `docs/D1_claudeReport`, PR #20) | drafted, unmerged; cite by section, recheck when merged |
+| D1 s2.3, 2.4, 2.6, 3, 6 (`docs/reports/D1-claude-certification.md`) | merged to `main` 4 Sep (7de8574); section numbers rechecked against the merged file, all resolve |
 | Slice 1 open questions and recommendations 4, 6, 8 | merged |
 | Slice 2 Modules 1, 2, 4 and Gaps recorded | PR #21 |
 | Zafir's Google note s5, s6, s8; Chirag's Microsoft note s5, s7 | merged |
 | Leon, 26 and 31 Aug meeting records | recorded |
 | Leon's Trust in AI Design deck | not in team folder; requested; marked slot |
 | DTA policy v2.0, Guidance for AI Adoption (Oct 2025), NBN Companies Act 2011, Statement of Expectations | fetched 2 Sep, quotes to be captured in the draft |
-| Privacy Act, Telecommunications Act, DDA and WCAG 2.2, SOCI Act, NBN Co RAP | to fetch |
-| Anthropic prompt engineering documentation | to fetch |
+| Privacy Act and APPs, DDA and WCAG, SOCI Act, NBN Co RAP, First Nations Digital Inclusion Plan | fetched 2 Sep, quoted in Module 6 |
+| Telecommunications Act 1997 | not fetched; open item for D3 |
+| Anthropic prompt engineering overview, Claude Code skills documentation | fetched 2 Sep, quoted in Module 5 |
 | Zafir's spike log tokens per task | not started; marked slot |
 
-## 6. What can start today
+## 6. Where it stands
 
-Modules 1 to 5 are writable now from merged material and the meeting records. Module 6 needs the remaining fetches (half a day) and is the only part with new research in it. Nothing is blocked on another person; the deck and the spike log are marked slots.
+All six modules are drafted (2 Sep). What remains is process: the module list agreed at the Thursday reconvene, the PR, the card comment naming who it unblocks, and the master doc entry pointed at the PR. Nothing is blocked on another person; the deck and the spike log are marked slots.
 
 ## 7. Constraints
 

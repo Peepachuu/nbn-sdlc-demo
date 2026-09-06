@@ -1,5 +1,7 @@
 # SDLC Model Requirements
 
+# Pass 1 - Slice 1 Lifecycle Requirements
+
 **Owner:** Ahmed Falulur Rahuman  
 
 **Planner card:** [PRD] - Requirements pass 1, off slice 1 : 90  
@@ -198,3 +200,115 @@ These still need clarification:
 ## Pass 1 note
 
 This is the first requirements pass. Later research, developer interviews and test findings can update these stories if new evidence changes what we currently know.
+
+---
+
+# Pass 2 - Slice 2 Build Requirements
+
+**Planner card:** [PRD] - Requirements pass 2, off slice 2 : 90
+
+**Pass:** 2 - Research Slice 2
+
+## User stories
+
+### US-11 - Keep each commit focused on one change
+
+**Source:** Slice 2 - Module 2: How a commit is done
+
+**User story:**
+
+As a developer, I want each commit to contain one clear change, so it is easier to review, understand and roll back.
+
+**Acceptance criteria:**
+
+- Each commit represents one logical change.
+- Commit messages follow the repository's Conventional Commits format.
+- If a change contains multiple separate purposes, it is split before review.
+
+---
+
+### US-12 - Require independent approval for AI-assisted pull requests
+
+**Source:** Slice 2 - Module 3: How branches become merges
+
+**User story:**
+
+As a developer, I want AI-assisted pull requests to be reviewed by someone who did not create or request the change, so the final decision is independent.
+
+**Acceptance criteria:**
+
+- The person who created or requested the AI-assisted change cannot be the only approver.
+- CI checks must pass before the pull request is merged.
+- A human reviewer checks the actual code changes and test plan before approval.
+
+---
+
+### US-13 - Add secret scanning to CI
+
+**Source:** Slice 2 - Module 4: How harnesses are used
+
+**Buildable:** Yes
+
+**User story:**
+
+As a developer, I want CI to check for exposed secrets, so credentials are caught before they are merged into the repository.
+
+**Acceptance criteria:**
+
+- Secret scanning runs automatically on pull requests.
+- The check fails when a likely secret is detected.
+- A detected secret must be removed or resolved before the change is merged.
+
+---
+
+### US-14 - Check whether AI-written tests actually catch bugs
+
+**Source:** Slice 2 - Module 4: How harnesses are used
+
+**Buildable:** Yes
+
+**User story:**
+
+As a tester or developer, I want AI-written tests to be checked using mutation testing, so passing tests do not give false confidence.
+
+**Acceptance criteria:**
+
+- Mutation testing can be run against AI-written tests.
+- The mutation score is recorded before a human changes the generated test file.
+- The team defines a minimum mutation-score threshold before it is used as a gate.
+
+---
+
+### US-15 - Enforce the design system during build
+
+**Source:** Slice 2 - Module 5: Design-system enforcement in build
+
+**User story:**
+
+As a developer or designer, I want AI-generated interfaces to follow the real design-system rules, so generated work does not introduce incorrect styles.
+
+**Acceptance criteria:**
+
+- Generated UI uses the design tokens stored in the repository.
+- Visual differences are checked using a screenshot or overlay comparison.
+- Updating the visual baseline requires human review.
+
+---
+
+### US-16 - Make the deployment gate clear
+
+**Source:** Slice 2 - Module 6: Deploy mechanics
+
+**User story:**
+
+As a developer, I want the model to clearly show when merging a change also deploys it, so I know the final human approval point before production.
+
+**Acceptance criteria:**
+
+- The model states whether merging to `main` automatically deploys the change.
+- If merging is the deployment gate, final pull-request approval is shown as the last human decision before production.
+- If manual promotion is used, it is shown as a separate human approval step.
+
+## Pass 2 note
+
+These requirements add the build-level mechanics identified in Research Slice 2. The existing Pass 1 lifecycle requirements remain unchanged. Findings from the build spike can be used to refine these stories later.

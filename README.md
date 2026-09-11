@@ -1,10 +1,42 @@
-# Garage Boilerplate
+# nbn-sdlc-demo
 
-> Streamlined Next.js + Firebase monorepo for student capstone projects — batteries included, beginner friendly, free-tier only.
+> Team 2's working repository for the RMIT industry capstone **20-NBN, Software Development Lifecycle Using AI**.
 
-**New here? Read the [step-by-step guide](docs/GUIDE.md)** — it walks you from clone to shipping your first feature. The system diagrams are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+The repository holds two things, and they serve one purpose:
 
-**Note for the PR** if you cannot merge your pr is because there is a high veulnerability and the system doesn't allow for pr with high vulnerabilities to be merged. Instructions are below to fix this.
+1. **The project's research and deliverables**, in [`docs/`](docs/). These examine how an AI-assisted software development lifecycle actually works, stage by stage, and what has to be true before NBN Co runs one.
+2. **A working Next.js + Firebase application**, the Garage Boilerplate, used as the demonstration codebase. Its commit history, hooks, CI runs and pull requests are the material the research examines, so claims about the lifecycle can be checked against a real repository instead of asserted.
+
+Here for the research? Start with [research slice 1, the spine](docs/research/slice1-spine.md). Here to run the app? Start with [the beginner guide](docs/GUIDE.md).
+
+## Project documentation
+
+### Research
+
+| Document | What it covers | Owner |
+|----------|----------------|-------|
+| [Slice 1, the spine](docs/research/slice1-spine.md) | The NBN Co eight-stage AI-SDLC map tested stage by stage against Google and Microsoft published practice, with a colour judgement and a reconciliation line per stage. [Requirements](docs/research/slice1-spine-requirements.md) | Zac Clarkson |
+| [Slice 2, build modules](docs/research/slice2-build-modules.md) | Six modules going inside the build stages at the depth of commands and gates: how a commit is made, how branches become merges, how harnesses are used, each with its human gate and failure mode. [Requirements](docs/research/slice2-build-modules-requirements.md) | Zac Clarkson |
+| Slice 3, governance | What sits around every stage: guardrails, cost, accountability, prompt practice, collaboration, and the external rules binding NBN Co. Drafted, in review, not yet merged | Zac Clarkson |
+| [Citation audit](docs/research/citation-audit.md) | Independent verification of the slice 1 citations, 63 falsifiable claims opened and checked against live sources, recorded one by one | Zac Clarkson |
+| [Google source note](docs/research/google-research.md) | Google's published AI-assisted development practice | Zafir Hasan |
+| [Microsoft source note](docs/research/microsoft-research.md) | Microsoft's published AI-assisted development practice | Chirag Wadehra |
+| [Developer interview guide](docs/research/interviews/developer-interview-guide.md) | Discussion guide and outreach plan for the developer interviews | Ahmed Falulur Rahuman |
+
+### Requirements, reports and decisions
+
+| Document | What it covers | Owner |
+|----------|----------------|-------|
+| [SDLC model requirements](docs/requirements.md) | Requirements for the SDLC model, first pass taken off slice 1 | Ahmed Falulur Rahuman |
+| [D1, Claude certification report](docs/reports/D1-claude-certification.md) | What Claude Code can be relied on to do across the lifecycle, with a capability inventory and a "where it stops" column for each mechanism | Sidney Zeng |
+| [ADR-001, technology stack](docs/adr/001-stack.md) | Why the Garage Boilerplate stack was adopted for the demonstration | Project team |
+| [Templates](docs/templates/) | ADR, source note, spike log and user story templates used across the project documents | Project team |
+
+Research documents are the working source. Word copies circulated in Teams for review are snapshots; edits belong here first.
+
+---
+
+The rest of this README describes the demonstration application.
 
 ## Stack
 
@@ -19,6 +51,8 @@
 
 There's no local emulator and no Docker — the app always talks to a real (free) Firebase project. Firebase Cloud Storage isn't used either, since real usage requires the paid Blaze plan; store file metadata in Firestore or use a free third-party host if a feature needs uploads.
 
+The system diagrams are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## Quick Start
 
 ### 0. Prerequisites
@@ -30,8 +64,8 @@ There's no local emulator and no Docker — the app always talks to a real (free
 ### 1. Bootstrap
 
 ```bash
-git clone https://github.com/your-org/garage-boilerplate my-project
-cd my-project
+git clone https://github.com/Peepachuu/nbn-sdlc-demo
+cd nbn-sdlc-demo
 pnpm run bootstrap
 ```
 
@@ -58,7 +92,7 @@ Create a project at [console.firebase.google.com](https://console.firebase.googl
    ```
 4. Set `NEXT_PUBLIC_FIREBASE_PROJECT_ID` in `.env` and the same id in `.firebaserc` (`projects.default`)
 
-Full variable reference: [docs/ENV-VARS.md](docs/ENV-VARS.md).
+Full variable reference: [docs/ENV-VARS.md](docs/ENV-VARS.md). The secrets already configured for this repository's own deployment and CI pipeline are listed in [docs/local-setup.md](docs/local-setup.md).
 
 ### 3. Run
 
@@ -81,6 +115,7 @@ Restart the dev server after changing `.env` — `NEXT_PUBLIC_*` variables are b
 | Ignored build scripts warning from pnpm | Build approvals live in `pnpm-workspace.yaml` (`allowBuilds`) — re-run `pnpm install`. |
 | "Missing or insufficient permissions" | Firestore security rules don't allow that access — add rules in `firebase/firestore.rules`, then deploy them (`npx firebase-tools deploy --only firestore:rules`). |
 | Commit rejected | Message must be Conventional Commits (`feat: …`, `fix: …`). |
+| Your PR shows a red **Security Scan** check | `pnpm audit --audit-level=high` failed. Two known high-severity findings have a documented fix: see [Known `pnpm audit` findings](#known-pnpm-audit-findings-manual-fix). |
 
 More beginner-oriented pitfalls: [docs/GUIDE.md § Common pitfalls](docs/GUIDE.md#6-common-pitfalls).
 
@@ -105,7 +140,11 @@ More beginner-oriented pitfalls: [docs/GUIDE.md § Common pitfalls](docs/GUIDE.m
 │       ├── middleware/ auth (ID token → req.user), errorHandler (RFC 9457)
 │       └── lib/       firebase (Admin singleton), errors (HttpError), zodConverter
 ├── firebase/          Firestore rules, indexes
-├── docs/              Guides and reference docs — start with GUIDE.md
+├── docs/              Boilerplate guides, and the project's own documents:
+│   ├── research/      Research slices, source notes, citation audit, interviews
+│   ├── reports/       Numbered project deliverables (D1 …)
+│   ├── adr/           Architectural decision records
+│   └── templates/     Document templates (ADR, source note, spike log, user story)
 └── .claude/           Claude Code harness (agents, skills, MCP, hooks)
 ```
 
@@ -131,8 +170,7 @@ Security is enforced in independent layers — Claude Code guard hooks, HTTP har
 
 ### Known `pnpm audit` findings (manual fix)
 
-
-`pnpm audit` currently flags two high-severity CVEs — both transitive, dev/build-time only, not runtime-reachable:
+CI runs `pnpm audit --audit-level=high` as the **Security Scan** job, so an outstanding high-severity finding turns that check red on every pull request. Two are currently flagged, both transitive and dev/build-time only, neither runtime-reachable:
 
 | Package | Issue | Pulled in by |
 |---------|-------|--------------|
@@ -152,11 +190,14 @@ Confirm with `pnpm audit` — should show 0 high/critical findings.
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Production — protected, no direct pushes |
+| `main` | Integration branch, changes arrive by pull request |
 | `feature/*` | New features → PR back to `main` |
 | `hotfix/*` | Urgent fixes → PR back to `main` |
+| `docs/*` | Project documents → PR back to `main` |
 
 Use the Claude Code skills `/git-feature`, `/git-hotfix`, `/git-release`. Details: [docs/GIT-WORKFLOW.md](docs/GIT-WORKFLOW.md).
+
+> **Enforcement gap, checked 3 September 2026.** The table above is the agreed process, not a rule the server applies. The repository has one ruleset, named "main", and it is active, but its branch target list is empty and it carries no required status checks, so nothing currently stops a direct push to `main` or a merge on a failing CI run. The live gates are the lefthook commit-msg check and the four CI jobs as advisory status. Fixing the ruleset needs repository admin. Full finding and evidence: [research slice 2, "Gaps recorded", item 3](docs/research/slice2-build-modules.md#gaps-recorded).
 
 ## Claude Code Harness
 
@@ -171,7 +212,7 @@ The repo ships a pre-configured harness: three MCP servers (**context7** for liv
 
 See [CLAUDE.md](CLAUDE.md) for the full harness reference.
 
-## Documentation
+## Boilerplate Documentation
 
 | Topic | Link |
 |-------|------|
@@ -191,13 +232,11 @@ See [CLAUDE.md](CLAUDE.md) for the full harness reference.
 | Security | [docs/SECURITY.md](docs/SECURITY.md) |
 | Git workflow | [docs/GIT-WORKFLOW.md](docs/GIT-WORKFLOW.md) |
 | CI/CD & deployment | [docs/CI-CD.md](docs/CI-CD.md) |
+| Deploying to Vercel | [docs/DEPLOY-TO-VERCEL.md](docs/DEPLOY-TO-VERCEL.md) |
 
 ## Deployment
 
-The frontend deploys to **Vercel** (free Hobby tier, no billing account needed — this app is server-rendered, so it needs a server host, not static hosting). 
-Use this to depoy to Vercel - [DEPLOY-TO-VERCEL.md](DEPLOY-TO-VERCEL.md)
-
-
+The frontend deploys to **Vercel** (free Hobby tier, no billing account needed — this app is server-rendered, so it needs a server host, not static hosting). Step-by-step: [docs/DEPLOY-TO-VERCEL.md](docs/DEPLOY-TO-VERCEL.md).
 
 ## Forking for a Client Project
 
